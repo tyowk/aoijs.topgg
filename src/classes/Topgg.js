@@ -41,6 +41,8 @@ exports.Topgg = class Topgg extends Manager {
     #bindEvents(event) {
         this.on(event, async (vote) => {
             const commands = this.client?.cmd?.[event] || this.cmd[event];
+            console.log(commands);
+            
             if (!commands) return;
             for (const cmd of commands.values()) {
                 console.log(cmd);
