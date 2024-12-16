@@ -46,7 +46,7 @@ exports.Topgg = class Topgg extends Manager {
                 let channel = this.client.channels.cache.get(cmd.channel);
                 let guild = channel ? channel.guild : null;
                 let member = guild ? guild.members.cache.get(vote.userId) : null;
-                let author = client.users.cache.get(vote.userId);
+                let author = this.client.users.cache.get(vote.userId);
                 
                 if (!cmd.__compiled__) {
                     if (cmd.channel?.startsWith("$")) {
