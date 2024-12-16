@@ -1,6 +1,6 @@
-const fs = require("fs");
-const path = require("path");
-const chalk = require("chalk");
+const fs = require('node:fs:);
+const path = require('node:path');
+const chalk = require('chalk');
 
 exports.Functions = class Functions {
     constructor(client, basePath, debug) {
