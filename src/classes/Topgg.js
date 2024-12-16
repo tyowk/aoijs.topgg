@@ -31,6 +31,7 @@ exports.Topgg = class Topgg extends Manager {
     loadVoteEvents(dir, debug = this.client.music.debug || false) {
         if (!this.client.loader) this.client.loader = new LoadCommands(this.client);
         this.client.loader.load(this.cmd, dir, debug);
+        return this;
     }
 
     voteEvent(name, evt = {}) {
@@ -38,6 +39,7 @@ exports.Topgg = class Topgg extends Manager {
         const cmd = this.cmd[name || evt.type || name.type];
         if (!cmd || !(cmd instanceof Group)) return;
         cmd.set(cmd.size, evt);
+        return this;
     }
 
     #bindEvents(event) {
