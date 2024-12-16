@@ -1,6 +1,7 @@
 {
     "name": "aoijs.topgg",
     "version": "1.0.0",
+    "main": "src/index.js",
     "dependencies": {
         "topgg.utils": "^4.0.0",
         "@aoijs/aoi.structures": "^1.0.0"
