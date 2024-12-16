@@ -11,6 +11,8 @@ exports.Topgg = class Topgg extends Manager {
         this.cmd = {
             botVote: new Group(),
             guildVote: new Group(),
+            error: new Group(),
+            ready: new Group()
         };
 
         this.client = client;
