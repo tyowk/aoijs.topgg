@@ -3,8 +3,12 @@ module.exports = (d) => {
     const manager = d.client.topgg;
     if (!manager) return d.aoiError.fnError(d, 'custom', {}, `Top.gg manager is not defined.`);
     
-    const result = d.data.randoms?.vote?.type;
+    const result = d.randoms?.vote?.type;
     if (!result) return d.client.returnCode(d, data);
+
+    /**
+     * returns "test" or "upvote"
+     */
     
     data.result = result;
     return {
