@@ -40,6 +40,7 @@ exports.Topgg = class Topgg extends Manager {
 
     #bindEvents(event) {
         this.on(event, async (vote) => {
+            console.log(vote);
             const commands = this.client?.cmd?.[event] || this.cmd[event];
             if (!commands) return;
             for (const cmd of commands.values()) {
@@ -58,7 +59,7 @@ exports.Topgg = class Topgg extends Manager {
                         guild = channel ? channel.guild : null;
                         member = guild ? guild.members.cache.get(vote.userId) : null;
                     };
-                    
+                    console.log(vote);
                     if (!channel) continue;
                     await this.client.functionManager.interpreter(
                         this.client, { guild, channel, author, member }, [], cmd,
