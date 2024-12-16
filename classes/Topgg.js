@@ -43,22 +43,28 @@ exports.Topgg = class Topgg extends Manager {
             for (const cmd of commands.values()) {
                 if (!cmd.channel) continue;
                 let channel = this.client.channels.cache.get(cmd.channel);
-                let guild = channel ? channel?.guild : null;
+                let guild = channel ? channel.guild : null;
+                let member = guild ? guild.members.cache.get(vote.userId) : null;
+                let author = client.users.cache.get(vote.userId);
+                
                 if (!cmd.__compiled__) {
                     if (cmd.channel?.startsWith("$")) {
                         channel = this.client.channels.cache.get((await this.client.functionManager.interpreter(
-                            this.client, { guild, channel }, [], { code: cmd.channel, name: 'NameParser' },
+                            this.client, { guild, channel, author, member }, [], { code: cmd.channel, name: 'NameParser' },
                             undefined, true, undefined, { vote }
                         ))?.code);
+                        guild = channel ? channel.guild : null;
+                        member = guild ? guild.members.cache.get(vote.userId) : null;
                     };
-                    if (!channel || !guild) continue;
+                    
+                    if (!channel) continue;
                     await this.client.functionManager.interpreter(
-                        this.client, { guild, channel }, [], cmd,
+                        this.client, { guild, channel, author, member }, [], cmd,
                         undefined, false, channel, { vote }
                     );
                 } else {
                     const client = this.client;
-                    await cmd.__compiled__({ client, channel, guild, vote });
+                    await cmd.__compiled__({ client, channel, guild, author, member, vote });
                 };
             };
         });
