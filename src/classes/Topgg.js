@@ -69,6 +69,7 @@ exports.Topgg = class Topgg extends Manager {
                 } else {
                     const client = this.client;
                     await cmd.__compiled__({ client, channel, guild, author, member, vote });
+                    console.log(vote);
                 };
             };
         });
