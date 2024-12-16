@@ -9,7 +9,7 @@ const client = new AoiClient({ ... });
 
 const topgg = new Topgg(client, {
     token: 'YOUR_TOPGG_API_TOKEN',
-    webhook; {
+    webhook: {
         endpoint: '/webhook or whatever you want',
         authorization: 'WEBHOOK_AUTHORIZATION',
         port: 'YOUR_SERVER_PORT'
