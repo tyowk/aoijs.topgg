@@ -40,7 +40,6 @@ exports.Topgg = class Topgg extends Manager {
 
     #bindEvents(event) {
         this.on(event, async (vote) => {
-            console.log(vote);
             const commands = this.client?.cmd?.[event] || this.cmd[event];
             if (!commands) return;
             for (const cmd of commands.values()) {
@@ -51,6 +50,7 @@ exports.Topgg = class Topgg extends Manager {
                 let author = client.users.cache.get(vote.userId);
                 
                 if (!cmd.__compiled__) {
+                    console.log('uwu');
                     if (cmd.channel?.startsWith("$")) {
                         channel = this.client.channels.cache.get((await this.client.functionManager.interpreter(
                             this.client, { guild, channel, author, member }, [], { code: cmd.channel, name: 'NameParser' },
@@ -65,11 +65,9 @@ exports.Topgg = class Topgg extends Manager {
                         this.client, { guild, channel, author, member }, [], cmd,
                         undefined, false, channel, { vote }
                     );
-                    console.log(vote);
                 } else {
                     const client = this.client;
                     await cmd.__compiled__({ client, channel, guild, author, member, vote });
-                    console.log(vote);
                 };
             };
         });
