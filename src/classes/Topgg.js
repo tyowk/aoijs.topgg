@@ -1,6 +1,7 @@
 const { Manager } = require('topgg.utils');
 const { Functions } = require('./Functions.js');
 const { LoadCommands } = require('aoi.js');
+const { Group } = require('@aoijs/aoi.structures');
 
 exports.Topgg = class Topgg extends Manager {
     constructor(client, options = {}) {
