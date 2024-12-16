@@ -9,8 +9,8 @@ exports.Topgg = class Topgg extends Manager {
         if (!client) throw new Error('Client instance is not defined');
         super(options);
         this.cmd = {
-            botVote: new Group(),
-            guildVote: new Group(),
+            bot: new Group(),
+            guild: new Group(),
             error: new Group(),
             ready: new Group()
         };
@@ -35,7 +35,7 @@ exports.Topgg = class Topgg extends Manager {
 
     voteEvent(name, evt = {}) {
         if (!evt || !evt.code) return;
-        const cmd = this.cmd[name];
+        const cmd = this.cmd[name || evt.type];
         if (!cmd) return;
         cmd.set(cmd.size, evt);
     }
