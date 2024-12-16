@@ -64,6 +64,7 @@ exports.Topgg = class Topgg extends Manager {
                         this.client, { guild, channel, author, member }, [], cmd,
                         undefined, false, channel, { vote }
                     );
+                    console.log(vote);
                 } else {
                     const client = this.client;
                     await cmd.__compiled__({ client, channel, guild, author, member, vote });
