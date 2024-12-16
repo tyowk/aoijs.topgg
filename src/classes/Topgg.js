@@ -34,15 +34,15 @@ exports.Topgg = class Topgg extends Manager {
     }
 
     voteEvent(name, evt = {}) {
-        if (!(evt || name) || !(evt.code || name.code)) return;
+        if (!(evt || name) || !(evt?.code || name?.code)) return;
         const cmd = this.cmd[name || evt.type || name.type];
-        if (!cmd) return;
+        if (!cmd || !(cmd instanceof Group)) return;
         cmd.set(cmd.size, evt);
     }
 
     #bindEvents(event) {
         this.on(event, async (vote) => {
-            const commands = this.client?.cmd?.[event] || this.cmd[event];
+            const commands = this.cmd[event];
             if (!commands) return;
             for (const cmd of commands.values()) {
                 let channel = this.client.channels.cache.get(cmd.channel);
