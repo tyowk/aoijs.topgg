@@ -19,8 +19,13 @@ const topgg = new Topgg(client, {
 
 ## Vote Events
 ```javascript
-topgg.voteEvent('bot', {
+topgg.voteEvent('botVote', {
     channel: 'LOG_CHANNEL_ID',
     code: '$username just voted!'
 });
+```
+
+## Handlers
+```javascript
+client.loadVoteEvents('./votes', true);
 ```
