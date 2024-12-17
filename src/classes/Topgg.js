@@ -18,11 +18,8 @@ exports.Topgg = class Topgg extends Manager {
         this.client = client;
         this.client.loadVoteEvents = this.loadVoteEvents.bind(this);
         this.client.voteEvent = this.voteEvent.bind(this);
-        this.client.topgg = {
-            ...this,
-            ...options,
-            cmd: this.cmd
-        };
+        this.options = options;
+        this.client.topgg = this;
         
         new Functions(this.client, join(__dirname, '..', 'functions'), options.debug);
         Object.keys(this.cmd).forEach((event) => this.#bindEvents(event));
