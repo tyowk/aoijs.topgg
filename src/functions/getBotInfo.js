@@ -7,7 +7,11 @@ module.exports = async (d) => {
     if (!manager) return d.aoiError.fnError(d, 'custom', {}, `Top.gg manager is not defined.`);
     if (!id) return d.aoiError.fnError(d, 'custom', {}, `Please give an invalid bot id`);
   
-    const botData = await manager?.getBot(id);
+    const botData = (d.data.botData && d.data.botData?.id === id)
+        ? d.data.botData
+        : await manager?.getBot(id);
+
+    d.data.botData = botData;
     if (!botData) return d.aoiError.fnError(d, 'custom', {}, `Bot with id "${id}" not found`);
 
     if (property === 'owners') {
