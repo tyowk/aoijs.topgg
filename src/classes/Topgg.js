@@ -8,6 +8,7 @@ exports.Topgg = class Topgg extends Manager {
     constructor(client, options = {}) {
         if (!client) throw new Error('Client instance is not defined');
         super(options);
+        
         this.cmd = {
             botVote: new Group(),
             guildVote: new Group(),
@@ -16,27 +17,12 @@ exports.Topgg = class Topgg extends Manager {
         };
 
         this.client = client;
+        this.client.topgg = this;
         this.client.loadVoteEvents = this.loadVoteEvents.bind(this);
         this.client.voteEvent = this.voteEvent.bind(this);
-        this.options = options;
-        this.client.topgg = this;
         
         new Functions(this.client, join(__dirname, '..', 'functions'), options.debug);
         Object.keys(this.cmd).forEach((event) => this.#bindEvents(event));
-    }
-
-    loadVoteEvents(dir, debug = this.client.music.debug || false) {
-        if (!this.client.loader) this.client.loader = new LoadCommands(this.client);
-        this.client.loader.load(this.cmd, dir, debug);
-        return this;
-    }
-
-    voteEvent(name, evt = {}) {
-        if (!(evt || name) || !(evt?.code || name?.code)) return;
-        const cmd = this.cmd[name || evt.type || name.type];
-        if (!cmd || !(cmd instanceof Group)) return;
-        cmd.set(cmd.size, evt);
-        return this;
     }
 
     #bindEvents(event) {
@@ -70,5 +56,29 @@ exports.Topgg = class Topgg extends Manager {
                 };
             };
         });
+    }
+
+    loadVoteEvents(dir, debug = this.client.music.debug || false) {
+        if (!this.client.loader) this.client.loader = new LoadCommands(this.client);
+        this.client.loader.load(this.cmd, dir, debug);
+        return this;
+    }
+
+    voteEvent(name, evt = {}) {
+        if (!name || !evt.code) return;
+        const cmd = this.cmd[name];
+        if (!cmd) return;
+        cmd.set(cmd.size, evt);
+        return this;
+    }
+
+    botVote(cmd) {
+        this.voteEvent('botVote', cmd);
+        return this;
+    }
+
+    guildVote(cmd) {
+        this.voteEvent('guildVote', cmd);
+        return this;
     }
 };
