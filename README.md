@@ -8,24 +8,28 @@ const { AoiClient } = require('aoi.js');
 const client = new AoiClient({ ... });
 
 const topgg = new Topgg(client, {
-    token: 'YOUR_TOPGG_API_TOKEN',
+    token: 'your_topgg_api_token',
     webhook: {
         endpoint: '/webhook or whatever you want',
-        authorization: 'WEBHOOK_AUTHORIZATION',
-        port: 'YOUR_SERVER_PORT'
+        authorization: 'webhook_authorization',
+        port: 'your_server_port'
     }
 });
 ```
 
 ## Vote Events
 ```javascript
-topgg.voteEvent('botVote', {
-    channel: 'LOG_CHANNEL_ID',
+const topgg = new Topgg({ ... });
+
+topgg.<eventName>({
+    channel: 'log_channel_id',
     code: '$username just voted!'
 });
 ```
 
 ## Handlers
 ```javascript
-client.loadVoteEvents('./votes', true);
+const topgg = new Topgg({ ... });
+
+topgg.loadVoteEvents('./votes', true);
 ```
