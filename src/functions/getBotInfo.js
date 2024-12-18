@@ -1,5 +1,6 @@
 module.exports = async (d) => {
     const data = d.util.aoiFunc(d);
+    if (data.err) return d.error(data.err);
     const [id, property = 'username', sep = ', '] = data.inside.splits;
 
     const manager = d.client.topgg;
