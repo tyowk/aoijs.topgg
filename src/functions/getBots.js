@@ -6,9 +6,10 @@ module.exports = async (d) => {
     
     const manager = d.client.topgg;
     if (!manager) return d.aoiError.fnError(d, 'custom', {}, `Top.gg manager is not defined.`);
-    
+
     if (typeof limit !== 'number') return d.aoiError.fnError(d, 'custom', {}, `Please provide a valid limit number`);
     if (typeof offset !== 'number') return d.aoiError.fnError(d, 'custom', {}, `Please provide a valid offset number`);
+    if (limit > 500) limit = 500;
     
     const botsData = await manager?.getBots(limit, offset, sort, fields);
     if (!botsData.results?.length) return d.aoiError.fnError(d, 'custom', {}, `Cannot finding any bots`);
