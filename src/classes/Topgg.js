@@ -81,4 +81,14 @@ exports.Topgg = class Topgg extends Manager {
         this.voteEvent('guildVote', cmd);
         return this;
     }
+
+    ready(cmd) {
+        this.voteEvent('ready', cmd);
+        return this;
+    }
+
+    error(cmd) {
+        this.voteEvent('error', cmd);
+        return this;
+    }
 };
